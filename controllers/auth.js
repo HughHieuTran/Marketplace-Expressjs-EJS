@@ -7,7 +7,7 @@ import sgMail from '@sendgrid/mail';
 const router = express.Router();
 
 sgMail.setApiKey(
-  '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'
+  'xxx'
 );
 
 export const getLogin = (req, res, next) => {
