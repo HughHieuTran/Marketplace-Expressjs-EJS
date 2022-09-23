@@ -11,7 +11,7 @@ import MongoDBStoreSession from 'connect-mongodb-session';
 import cors from 'cors';
 
 const database =
-  'mongodb+srv://nhotaikhoanok:Hieudz123@mynodejs.d9qjeom.mongodb.net/shop';
+  'your mongo uri';
 const port = 3000;
 const app = express();
 
