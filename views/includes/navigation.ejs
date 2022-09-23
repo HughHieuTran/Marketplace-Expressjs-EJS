@@ -1,0 +1,159 @@
+<div class="fixed top-0 left-0 w-full h-screen bg-black/50 z-5 hidden" id="backdrop"></div>
+
+<nav class="bg-gray-800 ">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <!-- Mobile menu button-->
+          <button type="button" id="side-menu-toggle" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <!--
+              Icon when menu is closed.
+  
+              Heroicon name: outline/bars-3
+  
+              Menu open: "hidden", Menu closed: "block"
+            -->
+            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <!--
+              Icon when menu is open.
+  
+              Heroicon name: outline/x-mark
+  
+              Menu open: "block", Menu closed: "hidden"
+            -->
+            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+        >
+          <a href="/" class="flex flex-shrink-0 items-center">
+            <img
+              class="block h-8 w-auto lg:hidden"
+              src="https://cdn.dribbble.com/users/230124/screenshots/15645740/media/5712571f79a059e26b5e4dd286598452.jpg?compress=1&resize=1000x750&vertical=top"
+              alt="Your Company"
+            />
+            <img
+              class="hidden h-8 w-auto lg:block"
+              src="https://cdn.dribbble.com/users/230124/screenshots/15645740/media/5712571f79a059e26b5e4dd286598452.jpg?compress=1&resize=1000x750&vertical=top"
+              alt="Your Company"
+            />
+          </a>
+          <div class="hidden sm:ml-6 sm:block">
+            <div class="flex space-x-4">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <a
+                href="/"
+                class="<%= path === '/' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %> px-3 py-2 rounded-md text-sm font-medium"
+                
+                >Shop</a
+              >
+              <% if (isAuthenticated) { %>
+              <a
+                href="/cart"
+                class="<%= path === '/cart' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %> px-3 py-2 rounded-md text-sm font-medium"
+                >Cart</a
+              >
+  
+              <a
+                href="/orders"
+                class="<%= path === '/orders' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %> px-3 py-2 rounded-md text-sm font-medium"
+                >Orders</a
+              >
+  
+              <a
+                href="/admin/add-product"
+                class="<%= path === '/admin/add-product' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %> px-3 py-2 rounded-md text-sm font-medium"
+                >Add Product</a
+              >
+  
+              <a
+                href="/admin/products"
+                class="<%= path === '/admin/products' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %> px-3 py-2 rounded-md text-sm font-medium"
+                >Admin Products</a
+              >
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+        >
+          <!-- Profile dropdown -->
+          <div class="relative ml-3">
+            <div>
+              <button
+                type="button"
+                class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                id="user-menu-button"
+              >
+                <span class="sr-only">Open user menu</span>
+                <img
+                  class="h-8 w-8 rounded-full bg-white"
+                  src="https://freesvg.org/img/abstract-user-flat-1.png"
+                  alt=""
+                />
+                
+              </button>
+            </div>
+
+            <div class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" id="profile-dropdown" tabindex="-1">
+              <!-- Active: "bg-gray-100", Not Active: "" -->
+              <% if (!isAuthenticated) { %>
+              <a href="/signup" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" tabindex="-1" id="user-menu-item-0">Signup</a>
+              <a href="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" tabindex="-1" id="user-menu-item-1">Login</a>
+              <% } else { %>
+                <form action="/logout" method="POST">
+                  <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" tabindex="-1" id="user-menu-item-0">Logout</button>
+                </form>
+              <% } %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="hidden md:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pt-2 pb-3">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <a
+          href="/"
+          class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+          >Shop</a
+        >
+  
+        <% if (isAuthenticated) { %>
+  
+        <a
+          href="/cart"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+          >Cart</a
+        >
+  
+        <a
+          href="/orders"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+          >Orders</a
+        >
+        <a
+          href="/admin/add-product"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+          >Add Product</a
+        >
+        <a
+          href="/admin/products"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+          >Admin Products</a
+        >
+        <% } %>
+      </div>
+    </div>
+  </nav>
+  

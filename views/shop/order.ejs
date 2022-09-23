@@ -1,0 +1,24 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/orders.css">
+    </head>
+    <body class="bg-gray-50">
+        <%- include('../includes/navigation.ejs') %>
+        <main class="overflow-hidden  shadow sm:rounded-lg">
+            <% if (orders.length <= 0) { %>
+                <h1 class="text-center text-2xl py-10">No Order generated</h1>
+            <% } else { %>
+                <ul class="border-t border-gray-200 px-6 ">
+                    <% orders.forEach(order => { %>
+                        <li class="px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6 odd:bg-gray-50 even:bg-slate-200">
+                            <h1>Order - # <%= order._id %></h1>
+                            <ul class="">
+                                <% order.products.forEach(p => { %>
+                                    <li class=""><%= p.product.title %> (<%= p.quantity %>)</li>
+                                <% }); %>
+                            </ul>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </main>
+        <%- include('../includes/end.ejs') %>

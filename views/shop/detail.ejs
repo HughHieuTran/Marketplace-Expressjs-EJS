@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+
+        <main class="text-center">
+            <br>
+            <h1 class="text-2xl font-bold text-gray-900 pb-5"><%= product.title %></h1>
+            
+            <hr class="py-3 w-[50%] mx-auto">
+            
+                <img class="mx-auto" src="<%= product.imageUrl %>" alt="<%= product.title %>">
+            
+            <br>
+            <h2>$<%= product.price %></h2>
+            <br>
+            <p><%= product.description %></p>
+
+            <br>
+            <% if (isAuthenticated) { %>
+                <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+            <% } %>
+        </main>
+
+
+
+
+
+    <%- include('../includes/end.ejs') %>
